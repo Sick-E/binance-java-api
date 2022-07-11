@@ -6,10 +6,15 @@ import com.binance.api.client.domain.account.request.CancelOrderRequest;
 import com.binance.api.client.domain.account.request.CancelOrderResponse;
 import com.binance.api.client.domain.account.request.OrderRequest;
 import com.binance.api.client.domain.account.request.OrderStatusRequest;
+import retrofit2.Call;
+import retrofit2.http.Query;
 
 import java.util.List;
 
 public interface BinanceApiMarginRestClient {
+
+    List<CrossMarginData> getCrossMarginData(String coin);
+
     /**
      * Get current margin account information using default parameters.
      */
@@ -39,8 +44,8 @@ public interface BinanceApiMarginRestClient {
 
     /**
      * Check margin order's status.
-     * @param orderStatusRequest order status request options/filters
      *
+     * @param orderStatusRequest order status request options/filters
      * @return an order
      */
     Order getOrderStatus(OrderStatusRequest orderStatusRequest);
@@ -71,7 +76,8 @@ public interface BinanceApiMarginRestClient {
 
     /**
      * Execute transfer between spot account and margin account
-     * @param asset asset to repay
+     *
+     * @param asset  asset to repay
      * @param amount amount to repay
      * @return transaction id
      */
@@ -79,7 +85,8 @@ public interface BinanceApiMarginRestClient {
 
     /**
      * Apply for a loan
-     * @param asset asset to repay
+     *
+     * @param asset  asset to repay
      * @param amount amount to repay
      * @return transaction id
      */
@@ -87,6 +94,7 @@ public interface BinanceApiMarginRestClient {
 
     /**
      * Query loan record
+     *
      * @param asset asset to query
      * @return repay records
      */
@@ -94,6 +102,7 @@ public interface BinanceApiMarginRestClient {
 
     /**
      * Query max borrowable
+     *
      * @param asset asset to query
      * @return max borrowable
      */
@@ -101,15 +110,17 @@ public interface BinanceApiMarginRestClient {
 
     /**
      * Query loan record
+     *
      * @param asset asset to query
-     * @param txId the tranId in POST /sapi/v1/margin/repay
+     * @param txId  the tranId in POST /sapi/v1/margin/repay
      * @return loan records
      */
     RepayQueryResult queryRepay(String asset, String txId);
 
     /**
      * Repay loan for margin account
-     * @param asset asset to repay
+     *
+     * @param asset  asset to repay
      * @param amount amount to repay
      * @return transaction id
      */
@@ -117,8 +128,9 @@ public interface BinanceApiMarginRestClient {
 
     /**
      * Query loan record
+     *
      * @param asset asset to query
-     * @param txId the tranId in POST /sapi/v1/margin/loan
+     * @param txId  the tranId in POST /sapi/v1/margin/loan
      * @return loan records
      */
     LoanQueryResult queryLoan(String asset, String txId);

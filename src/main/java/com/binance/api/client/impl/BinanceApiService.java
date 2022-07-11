@@ -123,8 +123,8 @@ public interface BinanceApiService {
     @POST("/api/v3/order/oco")
     Call<NewOCOResponse> newOCO(@Query("symbol") String symbol, @Query("listClientOrderId") String listClientOrderId, @Query("side") OrderSide side,
                                 @Query("quantity") String quantity, @Query("limitClientOrderId") String limitClientOrderId, @Query("price") String price,
-                                @Query("limitIcebergQty") String limitIcebergQty, @Query("stopClientOrderId")String stopClientOrderId, @Query("stopPrice") String stopPrice,
-                                @Query("stopLimitPrice")String stopLimitPrice, @Query("stopIcebergQty") String stopIcebergQty, @Query("stopLimitTimeInForce") TimeInForce stopLimitTimeInForce,
+                                @Query("limitIcebergQty") String limitIcebergQty, @Query("stopClientOrderId") String stopClientOrderId, @Query("stopPrice") String stopPrice,
+                                @Query("stopLimitPrice") String stopLimitPrice, @Query("stopIcebergQty") String stopIcebergQty, @Query("stopLimitTimeInForce") TimeInForce stopLimitTimeInForce,
                                 @Query("newOrderRespType") NewOrderResponseType newOrderRespType, @Query("recvWindow") Long recvWindow, @Query("timestamp") long timestamp);
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
@@ -227,6 +227,10 @@ public interface BinanceApiService {
     @Headers({BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER, BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER})
     @GET("/sapi/v1/margin/openOrders")
     Call<List<Order>> getOpenMarginOrders(@Query("symbol") String symbol, @Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
+
+    @Headers({BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER, BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER})
+    @GET("/sapi/v1/margin/crossMarginData")
+    Call<List<CrossMarginData>> getCrossMarginData(@Query("vipLevel") int vipLevel, @Query("coin") String coin, @Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/sapi/v1/margin/order")

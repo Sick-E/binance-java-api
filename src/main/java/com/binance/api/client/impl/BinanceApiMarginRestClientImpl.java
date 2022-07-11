@@ -26,6 +26,12 @@ public class BinanceApiMarginRestClientImpl implements BinanceApiMarginRestClien
     }
 
     @Override
+    public List<CrossMarginData> getCrossMarginData(String coin) {
+        return executeSync(binanceApiService.getCrossMarginData(0, coin,
+                BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
+    }
+
+    @Override
     public MarginAccount getAccount() {
         long timestamp = System.currentTimeMillis();
         return executeSync(binanceApiService.getMarginAccount(BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, timestamp));
